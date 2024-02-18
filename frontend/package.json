@@ -13,7 +13,6 @@
     "material-symbols": "^0.15.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.1.2",
-    "react-bootstrap-tabs": "^2.0.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1",
     "react-scripts": "5.0.1",
