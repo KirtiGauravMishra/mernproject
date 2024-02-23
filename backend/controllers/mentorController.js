@@ -26,7 +26,7 @@ export const getAllMentors = catchAsyncErrors(async (req, res, next) => {
        }
        const postedBy = req.user._id;
        const mentor = await User.findById(mentorid);
-       console.log("mentorName:", mentor.name);
+    //    console.log("mentorName:", mentor.name);
 
       // Create the appointment object
       const appointmentData = {

@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
         default: Date.now,
         },
 })
-
+console.log(process.env.JWT_SECRET_KEY)
 //ENCRYPTING THE PASSWORD WHEN THE USER REGISTERS OR MODIFIES HIS PASSWORD
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
@@ -59,8 +59,14 @@ userSchema.pre("save", async function (next) {
   //GENERATING A JWT TOKEN WHEN A USER REGISTERS OR LOGINS, IT DEPENDS ON OUR CODE THAT WHEN DO WE NEED TO GENERATE THE JWT TOKEN WHEN THE USER LOGIN OR REGISTER OR FOR BOTH. 
   userSchema.methods.getJWTToken = function () {
     return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: process.env.JWT_EXPIRE,
+      expiresIn: '15m',
     });
   };
+  userSchema.methods.getRefreshToken = function() {
+    const refreshToken = jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN_SECRET, {
+      expiresIn: '1440m',
+    });
+    return refreshToken;
+};
 
-  export const User = mongoose.model("User", userSchema);
+export const User = mongoose.model("User", userSchema);     
